@@ -70,18 +70,11 @@
         
           <a class="main-nav-link" href="/tags">标签</a>
         
+          <a class="main-nav-link" href="/search">搜索</a>
+        
           <a class="main-nav-link" href="/about">关于我</a>
         
           <a class="main-nav-link" href="/projects">项目集</a>
-        
-        
-          
-            <a class="main-nav-link quick-create-link" href="https://github.com/Diomest/Diomest.github.io/new/master?filename=source/_posts/new-post.md" target="_blank" rel="noopener noreferrer">写新随笔</a>
-          
-            <a class="main-nav-link quick-create-link" href="https://github.com/Diomest/Diomest.github.io/new/master?filename=source/_posts/new-category-post.md&value=---%0Atitle:%20分类文章标题%0Adate:%202026-02-21%2000:00:00%0Atags:%0A%20%20-%20分类%0Acategories:%0A%20%20-%20日常%0A---%0A" target="_blank" rel="noopener noreferrer">写分类文</a>
-          
-            <a class="main-nav-link quick-create-link" href="https://github.com/Diomest/Diomest.github.io/new/master?filename=source/_posts/new-tag-post.md&value=---%0Atitle:%20标签文章标题%0Adate:%202026-02-21%2000:00:00%0Atags:%0A%20%20-%20随笔%0Acategories:%0A%20%20-%20日常%0A---%0A" target="_blank" rel="noopener noreferrer">写标签文</a>
-          
         
       </nav>
       <nav id="sub-nav">
@@ -148,8 +141,13 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://diomest.github.io/projects/index.html" data-id="cuidhK9FxmThUgb3oQUtcs7yC" data-title="项目集" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      <a data-url="https://diomest.github.io/projects/index.html" data-id="cuido-beNr-3DVzvmZFOw2_23" data-title="项目集" class="article-share-link"><span class="fa fa-share">分享</span></a>
       
+      
+        <a href="/projects/index.html#comments" class="article-comment-link">
+          <span class="post-comments-count valine-comment-count fa fa-comment" data-xid="/projects/index.html" itemprop="commentCount"></span>
+          留言
+        </a>
       
       
     </footer>
@@ -159,6 +157,11 @@
   
 </article>
 
+
+
+  <section id="comments" class="vcomment">
+
+  </section>
 
 </section>
         
@@ -247,6 +250,8 @@
   
     <a href="/tags" class="mobile-nav-link">标签</a>
   
+    <a href="/search" class="mobile-nav-link">搜索</a>
+  
     <a href="/about" class="mobile-nav-link">关于我</a>
   
     <a href="/projects" class="mobile-nav-link">项目集</a>
@@ -263,6 +268,20 @@
 </nav>
 
     
+      <div id="floating-create">
+        <button id="floating-create-toggle" type="button" aria-expanded="false" aria-controls="floating-create-menu">＋ 新建</button>
+        <div id="floating-create-menu" aria-hidden="true">
+          
+            <a href="https://github.com/Diomest/Diomest.github.io/new/master?filename=source/_posts/new-post.md" target="_blank" rel="noopener noreferrer">写新随笔</a>
+          
+            <a href="https://github.com/Diomest/Diomest.github.io/new/master?filename=source/_posts/new-category-post.md&value=---%0Atitle:%20分类文章标题%0Adate:%202026-02-21%2000:00:00%0Atags:%0A%20%20-%20分类%0Acategories:%0A%20%20-%20日常%0A---%0A" target="_blank" rel="noopener noreferrer">写分类文</a>
+          
+            <a href="https://github.com/Diomest/Diomest.github.io/new/master?filename=source/_posts/new-tag-post.md&value=---%0Atitle:%20标签文章标题%0Adate:%202026-02-21%2000:00:00%0Atags:%0A%20%20-%20随笔%0Acategories:%0A%20%20-%20日常%0A---%0A" target="_blank" rel="noopener noreferrer">写标签文</a>
+          
+        </div>
+      </div>
+    
+    
 
 
 <script src="/js/jquery-3.6.4.min.js"></script>
@@ -277,8 +296,77 @@
 
 <script src="/js/script.js"></script>
 
+<script>
+  (function () {
+    var widget = document.getElementById('floating-create');
+    if (!widget) return;
+    var toggle = document.getElementById('floating-create-toggle');
+    var menu = document.getElementById('floating-create-menu');
+    if (!toggle || !menu) return;
+
+    function closeMenu() {
+      widget.classList.remove('open');
+      toggle.setAttribute('aria-expanded', 'false');
+      menu.setAttribute('aria-hidden', 'true');
+    }
+
+    function openMenu() {
+      widget.classList.add('open');
+      toggle.setAttribute('aria-expanded', 'true');
+      menu.setAttribute('aria-hidden', 'false');
+    }
+
+    toggle.addEventListener('click', function () {
+      if (widget.classList.contains('open')) {
+        closeMenu();
+      } else {
+        openMenu();
+      }
+    });
+
+    document.addEventListener('click', function (event) {
+      if (!widget.contains(event.target)) {
+        closeMenu();
+      }
+    });
+  })();
+</script>
 
 
+
+
+<script>
+  (function () {
+    var appId = "".trim();
+    var appKey = "".trim();
+    var container = document.querySelector('.vcomment');
+    if (!container) return;
+
+    if (!appId || !appKey) {
+      container.innerHTML = '<div style="padding:12px;border:1px dashed #d8d8d8;border-radius:8px;color:#666;">匿名评论功能待配置：请在 <code>_config.my-landscape.yml</code> 填写 Valine 的 <code>appId</code> 和 <code>appKey</code>。</div>';
+      return;
+    }
+
+    var script = document.createElement('script');
+    script.src = 'https://cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min.js';
+    script.onload = function () {
+      var notify = 'false' == true;
+      var verify = 'false' == true;
+      new Valine({
+        el: '.vcomment',
+        notify: notify,
+        verify: verify,
+        appId: appId,
+        appKey: appKey,
+        placeholder: "匿名发言区已开启，欢迎随意吐槽～",
+        pageSize: '10',
+        avatar: 'retro',
+        lang: 'zh-cn'
+      });
+    };
+    document.body.appendChild(script);
+  })();
+</script>
 
 
   </div>
