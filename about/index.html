@@ -372,6 +372,10 @@
     script.onload = function () {
       var notify = 'false' == true;
       var verify = 'false' == true;
+      var guestInfo = "nick"
+        .split(',')
+        .map(function (item) { return item.trim(); })
+        .filter(Boolean);
       new Valine({
         el: '.vcomment',
         notify: notify,
@@ -381,7 +385,8 @@
         placeholder: "匿名发言区已开启，欢迎随意吐槽～",
         pageSize: '10',
         avatar: 'retro',
-        lang: 'zh-cn'
+        lang: 'zh-cn',
+        guest_info: guestInfo
       });
     };
     document.body.appendChild(script);
