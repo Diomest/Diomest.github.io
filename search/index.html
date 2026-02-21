@@ -431,7 +431,7 @@
           <label for="bgm-volume">音量</label>
           <input id="bgm-volume" type="range" min="0" max="100" step="1" value="18">
         </div>
-        <audio id="bgm-audio" data-tracks="/music/playlist/Vaundy-%E8%88%9E%E5%A5%B3.mp3" src="/music/playlist/Vaundy-%E8%88%9E%E5%A5%B3.mp3" preload="auto" loop></audio>
+        <audio id="bgm-audio" data-tracks="/music/playlist/Vaundy-%E8%88%9E%E5%A5%B3.mp3||/music/pokemon-bgm.wav" src="/music/playlist/Vaundy-%E8%88%9E%E5%A5%B3.mp3" preload="auto" loop></audio>
       </div>
     
     
@@ -539,9 +539,11 @@
     var bgmLamps = Array.prototype.slice.call(document.querySelectorAll('.mc-redstone-lamp'));
     if (bgmAudio && bgmToggle) {
       var trackData = (bgmAudio.getAttribute('data-tracks') || '').split('||').filter(Boolean);
+      var currentTrackIndex = 0;
+      var trackErrorAttempts = 0;
       var chosenTrack = '';
       if (trackData.length) {
-        chosenTrack = trackData[Math.floor(Math.random() * trackData.length)];
+        chosenTrack = trackData[currentTrackIndex];
         bgmAudio.src = chosenTrack;
       }
 
@@ -556,6 +558,33 @@
       }
 
       var chosenTrackLabel = getTrackLabel(chosenTrack);
+
+      function syncCurrentTrackLabel() {
+        chosenTrackLabel = getTrackLabel(chosenTrack);
+      }
+
+      function switchToTrack(indexValue) {
+        if (!trackData.length) return false;
+        var safeIndex = Number(indexValue);
+        if (Number.isNaN(safeIndex)) return false;
+        if (safeIndex < 0 || safeIndex >= trackData.length) return false;
+        currentTrackIndex = safeIndex;
+        chosenTrack = trackData[currentTrackIndex];
+        syncCurrentTrackLabel();
+        bgmAudio.src = chosenTrack;
+        bgmAudio.load();
+        updateBgmUi();
+        return true;
+      }
+
+      function tryFallbackTrack() {
+        if (trackData.length < 2) return false;
+        if (trackErrorAttempts >= trackData.length - 1) return false;
+        trackErrorAttempts += 1;
+        var nextIndex = (currentTrackIndex + 1) % trackData.length;
+        return switchToTrack(nextIndex);
+      }
+
       var cfgVolume = Number('0.18');
       if (!Number.isNaN(cfgVolume)) {
         bgmAudio.volume = Math.max(0, Math.min(1, cfgVolume));
@@ -729,6 +758,11 @@
       bgmAudio.addEventListener('play', updateBgmUi);
       bgmAudio.addEventListener('pause', updateBgmUi);
       bgmAudio.addEventListener('error', function () {
+        if (tryFallbackTrack()) {
+          showBgmNotice('当前曲目失效，已切换备用曲目');
+          bgmAudio.play().catch(function () {});
+          return;
+        }
         showBgmNotice('音乐加载失败：请检查 /source/music/playlist/ 文件名');
       });
       updateBgmUi();
