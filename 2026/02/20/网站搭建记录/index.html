@@ -46,6 +46,12 @@
 <meta name="generator" content="Hexo 8.1.1"></head>
 
 <body>
+  <div id="poke-loader" aria-hidden="true">
+    <div class="poke-loader-panel">
+      <div class="pokeball"></div>
+      <div class="poke-loader-text">LOADING...</div>
+    </div>
+  </div>
   <div id="container">
     <div id="wrap">
       <header id="header">
@@ -397,6 +403,62 @@
       if (action === 'publish-post') {
         copyText('cd /Users/mac/Desktop/test/website_hexo && npm run clean && npm run build && npm run deploy');
         closeMenu();
+      }
+    });
+  })();
+</script>
+<script>
+  (function () {
+    var loader = document.getElementById('poke-loader');
+    function hideLoader() {
+      if (!loader || loader.classList.contains('hidden')) return;
+      loader.classList.add('hidden');
+    }
+
+    window.addEventListener('load', function () {
+      setTimeout(hideLoader, 280);
+    });
+    setTimeout(hideLoader, 2200);
+
+    var knownTypeMap = {
+      '吐槽': 'fire',
+      '随笔': 'normal',
+      '日常': 'normal',
+      '学习': 'electric',
+      '生信': 'psychic',
+      '医学生日常': 'grass',
+      '项目': 'steel',
+      '技术': 'dragon'
+    };
+    var fallbackTypes = ['fire', 'water', 'grass', 'electric', 'psychic', 'ice', 'fairy', 'steel', 'dark', 'dragon'];
+
+    function hashText(text) {
+      var hash = 0;
+      for (var i = 0; i < text.length; i += 1) {
+        hash = ((hash << 5) - hash) + text.charCodeAt(i);
+        hash |= 0;
+      }
+      return Math.abs(hash);
+    }
+
+    function resolveType(label) {
+      if (knownTypeMap[label]) return knownTypeMap[label];
+      return fallbackTypes[hashText(label) % fallbackTypes.length];
+    }
+
+    var badgeSelectors = '.article-tag-list-link, .tag-list-link, .category-list-link, .article-category-link';
+    document.querySelectorAll(badgeSelectors).forEach(function (node) {
+      var text = (node.textContent || '').trim();
+      if (!text) return;
+      var pType = resolveType(text);
+      node.classList.add('poke-type-badge', 'poke-type-' + pType);
+    });
+
+    document.querySelectorAll('.article-entry img, #header img, .widget img').forEach(function (imgNode) {
+      var src = (imgNode.getAttribute('src') || '').toLowerCase();
+      var alt = (imgNode.getAttribute('alt') || '').toLowerCase();
+      if (src.indexOf('avatar') !== -1 || alt.indexOf('avatar') !== -1 || alt.indexOf('头像') !== -1) {
+        imgNode.classList.add('pokemon-avatar-frame');
       }
     });
   })();
