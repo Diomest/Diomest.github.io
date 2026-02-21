@@ -461,10 +461,15 @@
         updateRedstoneLamps();
       }
 
+      function showBgmNotice(message) {
+        if (!bgmStatus || !message) return;
+        bgmStatus.textContent = message;
+      }
+
       bgmToggle.addEventListener('click', function () {
         if (bgmAudio.paused) {
           bgmAudio.play().catch(function () {
-            alert('浏览器阻止了自动播放，请再点一次“播放音乐”。');
+            showBgmNotice('浏览器拦截了播放，请再点一次 ▶');
           });
         } else {
           bgmAudio.pause();
@@ -597,6 +602,9 @@
 
       bgmAudio.addEventListener('play', updateBgmUi);
       bgmAudio.addEventListener('pause', updateBgmUi);
+      bgmAudio.addEventListener('error', function () {
+        showBgmNotice('音乐加载失败：请检查 /source/music/playlist/ 文件名');
+      });
       updateBgmUi();
 
       var autoPlay = 'true' === 'true';
