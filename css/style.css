@@ -1420,7 +1420,12 @@ body {
   background-image: radial-gradient(circle at 18px 18px, rgba(217,64,47,0.08) 0 8px, transparent 8px), radial-gradient(circle at 52px 52px, rgba(28,28,28,0.06) 0 7px, transparent 7px);
   background-size: 70px 70px;
   color: #1f1f1f;
-  font-family: "ZCOOL QingKe HuangYou", "Press Start 2P", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-family: "Source Han Serif SC", "Noto Serif SC", "Songti SC", "STSong", serif;
+}
+input,
+button,
+textarea {
+  font-family: "Source Han Serif SC", "Noto Serif SC", "Songti SC", "STSong", serif;
 }
 #container,
 #wrap {
@@ -1494,9 +1499,9 @@ body {
   color: #de4730;
 }
 .widget-title {
-  font-family: "Press Start 2P", "ZCOOL QingKe HuangYou", sans-serif;
+  font-family: "Source Han Serif SC", "Noto Serif SC", "Songti SC", serif;
   font-size: 14px;
-  letter-spacing: 1px;
+  letter-spacing: 0.3px;
   color: #de4730;
 }
 #main-nav {
@@ -1506,10 +1511,10 @@ body {
   border: 3px solid transparent;
   border-radius: 8px;
   padding: 16px 12px;
-  font-family: "Press Start 2P", "ZCOOL QingKe HuangYou", sans-serif;
-  font-size: 12px;
+  font-family: "Source Han Serif SC", "Noto Serif SC", "Songti SC", serif;
+  font-size: 16px;
   opacity: 1;
-  text-shadow: 1px 1px 0 #1f1f1f;
+  text-shadow: none;
 }
 .main-nav-link:hover {
   color: #fff;
@@ -1518,7 +1523,7 @@ body {
 }
 #sub-nav .nav-icon {
   opacity: 1;
-  text-shadow: 1px 1px 0 #1f1f1f;
+  text-shadow: none;
 }
 #sub-nav .nav-icon:hover {
   color: #fff;
@@ -1534,8 +1539,8 @@ body {
   color: #1f1f1f;
   -webkit-box-shadow: 4px 4px 0 rgba(31,31,31,0.3);
   box-shadow: 4px 4px 0 rgba(31,31,31,0.3);
-  font-family: "Press Start 2P", "ZCOOL QingKe HuangYou", sans-serif;
-  font-size: 12px;
+  font-family: "Source Han Serif SC", "Noto Serif SC", "Songti SC", serif;
+  font-size: 15px;
 }
 #floating-create-toggle:hover {
   -webkit-transform: translateY(-1px);
@@ -1557,8 +1562,8 @@ body {
 #floating-create-menu button {
   color: #1f1f1f;
   border-bottom: 2px solid #1f1f1f;
-  font-family: "ZCOOL QingKe HuangYou", "Press Start 2P", sans-serif;
-  font-size: 14px;
+  font-family: "Source Han Serif SC", "Noto Serif SC", "Songti SC", serif;
+  font-size: 16px;
 }
 #floating-create-menu a:hover,
 #floating-create-menu button:hover {
@@ -1581,6 +1586,33 @@ body {
 }
 .article-read-count .fa {
   margin-right: 4px;
+}
+.article-edit-action {
+  border: 2px solid #1f1f1f;
+  border-radius: 6px;
+  background: #fff;
+  color: #1f1f1f;
+  padding: 3px 8px;
+  margin-right: 10px;
+  cursor: pointer;
+  font-size: 14px;
+}
+.article-edit-action:hover {
+  background: #ffe16b;
+}
+.article-edit-link {
+  display: inline-block;
+  border: 2px solid #1f1f1f;
+  border-radius: 6px;
+  background: #de4730;
+  color: #fff !important;
+  text-decoration: none;
+  padding: 3px 8px;
+  margin-right: 10px;
+  font-size: 14px;
+}
+.article-edit-link:hover {
+  background: #1f1f1f;
 }
 #busuanzi_container_page_pv,
 #busuanzi_container_site_pv,
@@ -1623,7 +1655,7 @@ body {
 .archive-year {
   color: #de4730;
   font-size: 1.25em;
-  font-family: "Press Start 2P", "ZCOOL QingKe HuangYou", sans-serif;
+  font-family: "Source Han Serif SC", "Noto Serif SC", "Songti SC", serif;
 }
 .archive-hero {
   margin: 0 0 18px;
@@ -1637,7 +1669,7 @@ body {
 .archive-hero h2 {
   margin: 0 0 6px;
   color: #de4730;
-  font-family: "Press Start 2P", "ZCOOL QingKe HuangYou", sans-serif;
+  font-family: "Source Han Serif SC", "Noto Serif SC", "Songti SC", serif;
 }
 .archive-hero p {
   margin: 0;
@@ -1761,7 +1793,7 @@ body {
   gap: 10px;
 }
 .poke-loader-text {
-  font-family: "Press Start 2P", "ZCOOL QingKe HuangYou", sans-serif;
+  font-family: "Source Han Serif SC", "Noto Serif SC", "Songti SC", serif;
   font-size: 12px;
   color: #1f1f1f;
   letter-spacing: 1px;
@@ -1852,6 +1884,8 @@ body {
   -webkit-box-shadow: 4px 4px 0 rgba(31,31,31,0.26);
   box-shadow: 4px 4px 0 rgba(31,31,31,0.26);
   image-rendering: pixelated;
+  width: 100%;
+  max-width: 180px !important;
 }
 #poke-filter-bar {
   display: none;
@@ -1893,7 +1927,7 @@ body {
   background: #de4730;
   color: #fff;
   cursor: pointer;
-  font-family: "ZCOOL QingKe HuangYou", "Press Start 2P", sans-serif;
+  font-family: "Source Han Serif SC", "Noto Serif SC", "Songti SC", serif;
 }
 #poke-filter-clear:hover {
   background: #1f1f1f;

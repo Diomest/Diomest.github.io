@@ -24,7 +24,7 @@
   
   
   
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=ZCOOL+QingKe+HuangYou&display=swap.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&display=swap.css">
 
   
 <link rel="stylesheet" href="/css/style.css">
@@ -398,6 +398,14 @@
         copyText('cd /Users/mac/Desktop/test/website_hexo && npm run clean && npm run build && npm run deploy');
         closeMenu();
       }
+    });
+
+    document.querySelectorAll('.article-edit-action').forEach(function (editButton) {
+      editButton.addEventListener('click', function () {
+        var postSource = editButton.getAttribute('data-post-source');
+        if (!postSource) return;
+        copyText('cd /Users/mac/Desktop/test/website_hexo && open "source/' + postSource + '"');
+      });
     });
   })();
 </script>

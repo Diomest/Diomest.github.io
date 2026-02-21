@@ -30,7 +30,7 @@
   
   
   
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=ZCOOL+QingKe+HuangYou&display=swap.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&display=swap.css">
 
   
 <link rel="stylesheet" href="/css/style.css">
@@ -178,6 +178,17 @@
           <span class="fa fa-eye"></span>
           阅读 <span id="busuanzi_value_page_pv">0</span>
         </span>
+        
+          <button type="button" class="article-edit-action" data-post-source="_posts/网站搭建记录.md">
+            <span class="fa fa-pencil"></span> 修改这篇
+          </button>
+          
+          
+            <a class="article-edit-link" href="https://github.com/Diomest/Diomest.github.io/edit/master/source/_posts/%E7%BD%91%E7%AB%99%E6%90%AD%E5%BB%BA%E8%AE%B0%E5%BD%95.md" target="_blank" rel="noopener noreferrer">
+              <span class="fa fa-external-link"></span> 在线修改
+            </a>
+          
+        
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8C%BB%E5%AD%A6%E7%94%9F%E6%97%A5%E5%B8%B8/" rel="tag">医学生日常</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%90%90%E6%A7%BD/" rel="tag">吐槽</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%9A%8F%E7%AC%94/" rel="tag">随笔</a></li></ul>
@@ -404,6 +415,14 @@
         copyText('cd /Users/mac/Desktop/test/website_hexo && npm run clean && npm run build && npm run deploy');
         closeMenu();
       }
+    });
+
+    document.querySelectorAll('.article-edit-action').forEach(function (editButton) {
+      editButton.addEventListener('click', function () {
+        var postSource = editButton.getAttribute('data-post-source');
+        if (!postSource) return;
+        copyText('cd /Users/mac/Desktop/test/website_hexo && open "source/' + postSource + '"');
+      });
     });
   })();
 </script>
