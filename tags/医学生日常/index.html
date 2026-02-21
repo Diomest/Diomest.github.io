@@ -244,11 +244,20 @@
         <button id="floating-create-toggle" type="button" aria-expanded="false" aria-controls="floating-create-menu">＋ 新建</button>
         <div id="floating-create-menu" aria-hidden="true">
           
-            <a href="https://github.com/Diomest/Diomest.github.io/new/master?filename=source/_posts/new-post.md" target="_blank" rel="noopener noreferrer">写新随笔</a>
+            
+            
+              <button type="button" class="quick-create-action" data-action="new-post">新建文章（不跳转）</button>
+            
           
-            <a href="https://github.com/Diomest/Diomest.github.io/new/master?filename=source/_posts/new-category-post.md&value=---%0Atitle:%20分类文章标题%0Adate:%202026-02-21%2000:00:00%0Atags:%0A%20%20-%20分类%0Acategories:%0A%20%20-%20日常%0A---%0A" target="_blank" rel="noopener noreferrer">写分类文</a>
+            
+            
+              <button type="button" class="quick-create-action" data-action="local-preview">本地预览命令</button>
+            
           
-            <a href="https://github.com/Diomest/Diomest.github.io/new/master?filename=source/_posts/new-tag-post.md&value=---%0Atitle:%20标签文章标题%0Adate:%202026-02-21%2000:00:00%0Atags:%0A%20%20-%20随笔%0Acategories:%0A%20%20-%20日常%0A---%0A" target="_blank" rel="noopener noreferrer">写标签文</a>
+            
+            
+              <button type="button" class="quick-create-action" data-action="publish-post">一键发布命令</button>
+            
           
         </div>
       </div>
@@ -299,6 +308,45 @@
 
     document.addEventListener('click', function (event) {
       if (!widget.contains(event.target)) {
+        closeMenu();
+      }
+    });
+
+    function copyText(text) {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(function () {
+          alert('命令已复制：\n' + text);
+        }).catch(function () {
+          window.prompt('复制以下命令（Cmd+C）：', text);
+        });
+      } else {
+        window.prompt('复制以下命令（Cmd+C）：', text);
+      }
+    }
+
+    menu.addEventListener('click', function (event) {
+      var actionTarget = event.target.closest('.quick-create-action');
+      if (!actionTarget) return;
+      event.preventDefault();
+      var action = actionTarget.getAttribute('data-action');
+      if (!action) return;
+
+      if (action === 'new-post') {
+        var title = window.prompt('输入新文章标题（例如：今天也要按时睡觉）');
+        if (!title) return;
+        copyText('cd /Users/mac/Desktop/test/website_hexo && npx hexo new post "' + title + '"');
+        closeMenu();
+        return;
+      }
+
+      if (action === 'local-preview') {
+        copyText('cd /Users/mac/Desktop/test/website_hexo && npm run server');
+        closeMenu();
+        return;
+      }
+
+      if (action === 'publish-post') {
+        copyText('cd /Users/mac/Desktop/test/website_hexo && npm run clean && npm run build && npm run deploy');
         closeMenu();
       }
     });

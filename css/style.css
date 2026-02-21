@@ -1375,7 +1375,8 @@ pre .javascript .function {
   -webkit-box-shadow: 0 12px 24px rgba(0,0,0,0.3);
   box-shadow: 0 12px 24px rgba(0,0,0,0.3);
 }
-#floating-create-menu a {
+#floating-create-menu a,
+#floating-create-menu button {
   display: block;
   color: #fff;
   text-decoration: none;
@@ -1383,11 +1384,20 @@ pre .javascript .function {
   padding: 9px 12px;
   border-bottom: 1px solid rgba(255,255,255,0.08);
 }
-#floating-create-menu a:last-child {
+#floating-create-menu a:last-child,
+#floating-create-menu button:last-child {
   border-bottom: none;
 }
-#floating-create-menu a:hover {
+#floating-create-menu a:hover,
+#floating-create-menu button:hover {
   background: rgba(255,255,255,0.14);
+}
+#floating-create-menu button {
+  width: 100%;
+  text-align: left;
+  border: none;
+  background: transparent;
+  cursor: pointer;
 }
 #floating-create.open #floating-create-menu {
   display: block;
@@ -1507,7 +1517,8 @@ body {
   backdrop-filter: blur(6px);
   background: rgba(56,40,80,0.93);
 }
-#floating-create-menu a {
+#floating-create-menu a,
+#floating-create-menu button {
   padding: 10px 14px;
 }
 .main-nav-link {

@@ -14,7 +14,7 @@
 <meta property="og:description" content="🤝 友链交换欢迎来交换友链，建议先加我再联系我～ 我的信息 站点名：多肉小马的一次元世界 地址：https:&#x2F;&#x2F;duorouxiaoma.com 简介：一个普普通通医学生的自我吐槽 头像：https:&#x2F;&#x2F;duorouxiaoma.com&#x2F;images&#x2F;avatar.jpg 联系方式：lijunchengstudy@163.com  已添加友链 Hexo：快速、简洁、强大的博客框架 GitHub：">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-02-21T03:50:00.000Z">
-<meta property="article:modified_time" content="2026-02-21T03:35:08.835Z">
+<meta property="article:modified_time" content="2026-02-21T03:46:24.447Z">
 <meta property="article:author" content="多肉小马">
 <meta property="article:tag" content="医学生, 博客, 吐槽, 学习记录">
 <meta name="twitter:card" content="summary">
@@ -130,15 +130,15 @@
 <li><strong>地址</strong>：<a href="https://duorouxiaoma.com/">https://duorouxiaoma.com</a></li>
 <li><strong>简介</strong>：一个普普通通医学生的自我吐槽</li>
 <li><strong>头像</strong>：<a href="https://duorouxiaoma.com/images/avatar.jpg">https://duorouxiaoma.com/images/avatar.jpg</a></li>
-<li><strong>联系方式</strong>：<a href="mailto:&#108;&#x69;&#106;&#117;&#x6e;&#99;&#x68;&#x65;&#x6e;&#x67;&#x73;&#116;&#117;&#x64;&#121;&#x40;&#49;&#54;&#x33;&#46;&#99;&#x6f;&#x6d;">lijunchengstudy@163.com</a></li>
+<li><strong>联系方式</strong>：<a href="mailto:&#108;&#105;&#x6a;&#x75;&#x6e;&#x63;&#104;&#101;&#x6e;&#x67;&#115;&#x74;&#x75;&#100;&#x79;&#64;&#49;&#x36;&#51;&#x2e;&#x63;&#111;&#x6d;">lijunchengstudy@163.com</a></li>
 </ul>
 <h2 id="已添加友链"><a href="#已添加友链" class="headerlink" title="已添加友链"></a>已添加友链</h2><ul>
 <li><a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>：快速、简洁、强大的博客框架</li>
 <li><a target="_blank" rel="noopener" href="https://github.com/">GitHub</a>：代码托管与协作平台</li>
 <li><a target="_blank" rel="noopener" href="https://www.youtube.com/@NewJeans_official">NewJeans Official</a>：日常快乐补给站</li>
+<li><a target="_blank" rel="noopener" href="https://github.com/Diomest">多肉小马的 GitHub</a>：博客源码与折腾记录大本营</li>
 </ul>
 <h2 id="申请格式（复制即可）"><a href="#申请格式（复制即可）" class="headerlink" title="申请格式（复制即可）"></a>申请格式（复制即可）</h2><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">站点名：</span><br><span class="line">站点地址：</span><br><span class="line">头像地址：</span><br><span class="line">站点简介：</span><br></pre></td></tr></table></figure>
-
 
       
     </div>
@@ -270,11 +270,20 @@
         <button id="floating-create-toggle" type="button" aria-expanded="false" aria-controls="floating-create-menu">＋ 新建</button>
         <div id="floating-create-menu" aria-hidden="true">
           
-            <a href="https://github.com/Diomest/Diomest.github.io/new/master?filename=source/_posts/new-post.md" target="_blank" rel="noopener noreferrer">写新随笔</a>
+            
+            
+              <button type="button" class="quick-create-action" data-action="new-post">新建文章（不跳转）</button>
+            
           
-            <a href="https://github.com/Diomest/Diomest.github.io/new/master?filename=source/_posts/new-category-post.md&value=---%0Atitle:%20分类文章标题%0Adate:%202026-02-21%2000:00:00%0Atags:%0A%20%20-%20分类%0Acategories:%0A%20%20-%20日常%0A---%0A" target="_blank" rel="noopener noreferrer">写分类文</a>
+            
+            
+              <button type="button" class="quick-create-action" data-action="local-preview">本地预览命令</button>
+            
           
-            <a href="https://github.com/Diomest/Diomest.github.io/new/master?filename=source/_posts/new-tag-post.md&value=---%0Atitle:%20标签文章标题%0Adate:%202026-02-21%2000:00:00%0Atags:%0A%20%20-%20随笔%0Acategories:%0A%20%20-%20日常%0A---%0A" target="_blank" rel="noopener noreferrer">写标签文</a>
+            
+            
+              <button type="button" class="quick-create-action" data-action="publish-post">一键发布命令</button>
+            
           
         </div>
       </div>
@@ -325,6 +334,45 @@
 
     document.addEventListener('click', function (event) {
       if (!widget.contains(event.target)) {
+        closeMenu();
+      }
+    });
+
+    function copyText(text) {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(function () {
+          alert('命令已复制：\n' + text);
+        }).catch(function () {
+          window.prompt('复制以下命令（Cmd+C）：', text);
+        });
+      } else {
+        window.prompt('复制以下命令（Cmd+C）：', text);
+      }
+    }
+
+    menu.addEventListener('click', function (event) {
+      var actionTarget = event.target.closest('.quick-create-action');
+      if (!actionTarget) return;
+      event.preventDefault();
+      var action = actionTarget.getAttribute('data-action');
+      if (!action) return;
+
+      if (action === 'new-post') {
+        var title = window.prompt('输入新文章标题（例如：今天也要按时睡觉）');
+        if (!title) return;
+        copyText('cd /Users/mac/Desktop/test/website_hexo && npx hexo new post "' + title + '"');
+        closeMenu();
+        return;
+      }
+
+      if (action === 'local-preview') {
+        copyText('cd /Users/mac/Desktop/test/website_hexo && npm run server');
+        closeMenu();
+        return;
+      }
+
+      if (action === 'publish-post') {
+        copyText('cd /Users/mac/Desktop/test/website_hexo && npm run clean && npm run build && npm run deploy');
         closeMenu();
       }
     });
