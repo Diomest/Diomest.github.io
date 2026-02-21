@@ -1413,136 +1413,171 @@ pre .javascript .function {
   }
 }
 body {
-  background: -webkit-linear-gradient(270deg, #ffe7f4 0%, #ffe6f8 48%, #f7e0ff 100%);
-  background: -moz-linear-gradient(270deg, #ffe7f4 0%, #ffe6f8 48%, #f7e0ff 100%);
-  background: -ms-linear-gradient(270deg, #ffe7f4 0%, #ffe6f8 48%, #f7e0ff 100%);
-  background: linear-gradient(180deg, #ffe7f4 0%, #ffe6f8 48%, #f7e0ff 100%);
-  color: #3a3345;
+  background-color: #f6f6d8;
+  background-image: -webkit-radial-gradient(circle at 18px 18px, rgba(217,64,47,0.08) 0 8px, transparent 8px), -webkit-radial-gradient(circle at 52px 52px, rgba(28,28,28,0.06) 0 7px, transparent 7px);
+  background-image: -moz-radial-gradient(circle at 18px 18px, rgba(217,64,47,0.08) 0 8px, transparent 8px), -moz-radial-gradient(circle at 52px 52px, rgba(28,28,28,0.06) 0 7px, transparent 7px);
+  background-image: -ms-radial-gradient(circle at 18px 18px, rgba(217,64,47,0.08) 0 8px, transparent 8px), -ms-radial-gradient(circle at 52px 52px, rgba(28,28,28,0.06) 0 7px, transparent 7px);
+  background-image: radial-gradient(circle at 18px 18px, rgba(217,64,47,0.08) 0 8px, transparent 8px), radial-gradient(circle at 52px 52px, rgba(28,28,28,0.06) 0 7px, transparent 7px);
+  background-size: 70px 70px;
+  color: #1f1f1f;
+  font-family: "ZCOOL QingKe HuangYou", "Press Start 2P", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 #container,
 #wrap {
-  background: -webkit-linear-gradient(270deg, #ffe7f4 0%, #ffe6f8 48%, #f7e0ff 100%);
-  background: -moz-linear-gradient(270deg, #ffe7f4 0%, #ffe6f8 48%, #f7e0ff 100%);
-  background: -ms-linear-gradient(270deg, #ffe7f4 0%, #ffe6f8 48%, #f7e0ff 100%);
-  background: linear-gradient(180deg, #ffe7f4 0%, #ffe6f8 48%, #f7e0ff 100%);
+  background: transparent;
 }
 #header {
-  border-bottom: none;
-  -webkit-box-shadow: 0 10px 26px rgba(203,114,184,0.32);
-  box-shadow: 0 10px 26px rgba(203,114,184,0.32);
+  border-bottom: 4px solid #1f1f1f;
+  -webkit-box-shadow: 0 12px 0 rgba(31,31,31,0.13);
+  box-shadow: 0 12px 0 rgba(31,31,31,0.13);
+}
+#header:before,
+#header:after {
+  display: none;
+}
+#logo,
+#subtitle {
+  text-shadow: 2px 2px 0 #1f1f1f;
 }
 #logo {
-  font-weight: 600;
-  letter-spacing: 1px;
+  color: #ffe16b;
+  font-weight: 700;
+  letter-spacing: 2px;
 }
 #subtitle {
-  opacity: 0.98;
+  color: #fff;
 }
 #main {
-  padding-top: 6px;
+  padding-top: 8px;
 }
 .article-inner {
-  border-radius: 18px;
-  border: 1px solid rgba(238,167,214,0.72);
-  -webkit-box-shadow: 0 12px 26px rgba(208,129,188,0.2);
-  box-shadow: 0 12px 26px rgba(208,129,188,0.2);
-  background: -webkit-linear-gradient(270deg, #fff8fc 0%, #fff1f9 100%);
-  background: -moz-linear-gradient(270deg, #fff8fc 0%, #fff1f9 100%);
-  background: -ms-linear-gradient(270deg, #fff8fc 0%, #fff1f9 100%);
-  background: linear-gradient(180deg, #fff8fc 0%, #fff1f9 100%);
+  border-radius: 10px;
+  border: 4px solid #1f1f1f;
+  -webkit-box-shadow: 6px 6px 0 rgba(31,31,31,0.22);
+  box-shadow: 6px 6px 0 rgba(31,31,31,0.22);
+  background: #fffdf2;
 }
 .article-header {
-  padding-top: 22px;
+  padding-top: 18px;
 }
 .article-title {
-  font-size: 1.68em;
+  font-size: 1.7em;
   line-height: 1.35;
+  color: #de4730;
 }
 .article-entry p {
-  line-height: 1.9;
+  line-height: 1.85;
 }
 .article-entry a {
-  color: #a44ac7;
+  color: #2c5ab2;
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
 }
 .article-entry a:hover {
-  color: #8438a3;
+  color: #de4730;
 }
 .article-footer {
-  border-top: 1px dashed rgba(220,131,191,0.55);
+  border-top: 2px dashed #1f1f1f;
 }
 .widget {
-  border-radius: 14px;
-  border: 1px solid rgba(238,176,219,0.95);
-  -webkit-box-shadow: 0 8px 18px rgba(216,130,194,0.18);
-  box-shadow: 0 8px 18px rgba(216,130,194,0.18);
-  background: -webkit-linear-gradient(270deg, #fff7fc 0%, #ffeef8 100%);
-  background: -moz-linear-gradient(270deg, #fff7fc 0%, #ffeef8 100%);
-  background: -ms-linear-gradient(270deg, #fff7fc 0%, #ffeef8 100%);
-  background: linear-gradient(180deg, #fff7fc 0%, #ffeef8 100%);
+  border-radius: 8px;
+  border: 4px solid #1f1f1f;
+  -webkit-box-shadow: 6px 6px 0 rgba(31,31,31,0.2);
+  box-shadow: 6px 6px 0 rgba(31,31,31,0.2);
+  background: #fffdf2;
+  text-shadow: none;
 }
 .widget a {
-  color: #a44ac7;
+  color: #2c5ab2;
 }
 .widget a:hover {
-  color: #8438a3;
+  color: #de4730;
 }
 .widget-title {
-  font-weight: 600;
-  letter-spacing: 0.4px;
-  color: #8f3a8c;
+  font-family: "Press Start 2P", "ZCOOL QingKe HuangYou", sans-serif;
+  font-size: 14px;
+  letter-spacing: 1px;
+  color: #de4730;
+}
+#main-nav {
+  margin-left: -6px;
+}
+.main-nav-link {
+  border: 3px solid transparent;
+  border-radius: 8px;
+  padding: 16px 12px;
+  font-family: "Press Start 2P", "ZCOOL QingKe HuangYou", sans-serif;
+  font-size: 12px;
+  opacity: 1;
+  text-shadow: 1px 1px 0 #1f1f1f;
+}
+.main-nav-link:hover {
+  color: #fff;
+  background: #de4730;
+  border-color: #1f1f1f;
+}
+#sub-nav .nav-icon {
+  opacity: 1;
+  text-shadow: 1px 1px 0 #1f1f1f;
+}
+#sub-nav .nav-icon:hover {
+  color: #fff;
+  background: #de4730;
+  border-radius: 8px;
 }
 #floating-create-toggle {
-  background: -webkit-linear-gradient(315deg, #ff74bd, #b388ff);
-  background: -moz-linear-gradient(315deg, #ff74bd, #b388ff);
-  background: -ms-linear-gradient(315deg, #ff74bd, #b388ff);
-  background: linear-gradient(135deg, #ff74bd, #b388ff);
-  padding: 11px 18px;
-  font-size: 14px;
-  -webkit-transition: -webkit-transform 0.18s ease, box-shadow 0.18s ease;
-  -moz-transition: -moz-transform 0.18s ease, box-shadow 0.18s ease;
-  -ms-transition: -ms-transform 0.18s ease, box-shadow 0.18s ease;
-  transition: transform 0.18s ease, box-shadow 0.18s ease;
+  border: 3px solid #1f1f1f;
+  background: -webkit-linear-gradient(270deg, #f65f4b 0 46%, #f8f8f8 46% 54%, #fff 54% 100%);
+  background: -moz-linear-gradient(270deg, #f65f4b 0 46%, #f8f8f8 46% 54%, #fff 54% 100%);
+  background: -ms-linear-gradient(270deg, #f65f4b 0 46%, #f8f8f8 46% 54%, #fff 54% 100%);
+  background: linear-gradient(180deg, #f65f4b 0 46%, #f8f8f8 46% 54%, #fff 54% 100%);
+  color: #1f1f1f;
+  -webkit-box-shadow: 4px 4px 0 rgba(31,31,31,0.3);
+  box-shadow: 4px 4px 0 rgba(31,31,31,0.3);
+  font-family: "Press Start 2P", "ZCOOL QingKe HuangYou", sans-serif;
+  font-size: 12px;
 }
 #floating-create-toggle:hover {
   -webkit-transform: translateY(-1px);
   -moz-transform: translateY(-1px);
   -ms-transform: translateY(-1px);
   transform: translateY(-1px);
-  -webkit-box-shadow: 0 14px 30px rgba(209,120,213,0.4);
-  box-shadow: 0 14px 30px rgba(209,120,213,0.4);
+  -webkit-box-shadow: 5px 5px 0 rgba(31,31,31,0.35);
+  box-shadow: 5px 5px 0 rgba(31,31,31,0.35);
 }
 #floating-create-menu {
-  min-width: 154px;
-  border-radius: 12px;
-  backdrop-filter: blur(6px);
-  background: rgba(56,40,80,0.93);
+  min-width: 178px;
+  border-radius: 8px;
+  border: 3px solid #1f1f1f;
+  background: #fffdf2;
+  -webkit-box-shadow: 6px 6px 0 rgba(31,31,31,0.24);
+  box-shadow: 6px 6px 0 rgba(31,31,31,0.24);
 }
 #floating-create-menu a,
 #floating-create-menu button {
-  padding: 10px 14px;
+  color: #1f1f1f;
+  border-bottom: 2px solid #1f1f1f;
+  font-family: "ZCOOL QingKe HuangYou", "Press Start 2P", sans-serif;
+  font-size: 14px;
 }
-.main-nav-link {
-  font-weight: 400;
-}
-.main-nav-link:hover {
-  color: #ffe5ff;
+#floating-create-menu a:hover,
+#floating-create-menu button:hover {
+  background: #ffe16b;
 }
 .post-top-badge {
   display: inline-block;
   margin-left: 8px;
   padding: 2px 8px;
-  border-radius: 999px;
+  border-radius: 6px;
   font-size: 12px;
   color: #fff;
-  background: -webkit-linear-gradient(315deg, #ff6fae, #d16bff);
-  background: -moz-linear-gradient(315deg, #ff6fae, #d16bff);
-  background: -ms-linear-gradient(315deg, #ff6fae, #d16bff);
-  background: linear-gradient(135deg, #ff6fae, #d16bff);
+  border: 2px solid #1f1f1f;
+  background: #de4730;
   vertical-align: middle;
 }
 .article-read-count {
   margin-right: 14px;
-  color: #8f4f8b;
+  color: #495b28;
 }
 .article-read-count .fa {
   margin-right: 4px;
@@ -1552,32 +1587,26 @@ body {
 #busuanzi_container_site_uv {
   display: none;
 }
-#sub-nav .nav-icon:hover {
-  color: #ffe5ff;
-}
 #footer {
-  border-top: 1px solid rgba(215,139,190,0.45);
-  background: -webkit-linear-gradient(270deg, #ffe6f4 0%, #f9defa 100%);
-  background: -moz-linear-gradient(270deg, #ffe6f4 0%, #f9defa 100%);
-  background: -ms-linear-gradient(270deg, #ffe6f4 0%, #f9defa 100%);
-  background: linear-gradient(180deg, #ffe6f4 0%, #f9defa 100%);
+  border-top: 4px solid #1f1f1f;
+  background: #e4edb7;
 }
 #footer,
 #footer a {
-  color: #8f558e;
+  color: #1f1f1f;
 }
 #footer a:hover {
-  color: #a44ac7;
+  color: #de4730;
 }
 #site-stats {
-  margin-top: 10px;
+  margin-top: 12px;
   display: -webkit-box;
   display: -moz-box;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: box;
   display: flex;
-  gap: 12px;
+  gap: 10px;
   -webkit-box-lines: multiple;
   -moz-box-lines: multiple;
   -webkit-flex-wrap: wrap;
@@ -1587,41 +1616,39 @@ body {
 }
 #site-stats span {
   padding: 2px 8px;
-  border-radius: 999px;
-  background: rgba(255,255,255,0.42);
-  border: 1px solid rgba(220,146,198,0.45);
+  border-radius: 6px;
+  background: #fffdf2;
+  border: 2px solid #1f1f1f;
 }
 .archive-year {
-  color: #9a3b96;
-  font-size: 1.3em;
+  color: #de4730;
+  font-size: 1.25em;
+  font-family: "Press Start 2P", "ZCOOL QingKe HuangYou", sans-serif;
 }
 .archive-hero {
   margin: 0 0 18px;
   padding: 14px 18px;
-  border-radius: 14px;
-  border: 1px solid rgba(237,172,218,0.82);
-  background: -webkit-linear-gradient(270deg, #fff6fb 0%, #ffeef8 100%);
-  background: -moz-linear-gradient(270deg, #fff6fb 0%, #ffeef8 100%);
-  background: -ms-linear-gradient(270deg, #fff6fb 0%, #ffeef8 100%);
-  background: linear-gradient(180deg, #fff6fb 0%, #ffeef8 100%);
+  border-radius: 8px;
+  border: 4px solid #1f1f1f;
+  background: #fffdf2;
+  -webkit-box-shadow: 6px 6px 0 rgba(31,31,31,0.2);
+  box-shadow: 6px 6px 0 rgba(31,31,31,0.2);
 }
 .archive-hero h2 {
   margin: 0 0 6px;
-  color: #9a3b96;
+  color: #de4730;
+  font-family: "Press Start 2P", "ZCOOL QingKe HuangYou", sans-serif;
 }
 .archive-hero p {
   margin: 0;
-  color: #8f558e;
+  color: #2e3c15;
 }
 .archive-article-inner {
-  border-radius: 14px;
-  border: 1px solid rgba(237,172,218,0.85);
-  background: -webkit-linear-gradient(270deg, #fff6fb 0%, #ffedf7 100%);
-  background: -moz-linear-gradient(270deg, #fff6fb 0%, #ffedf7 100%);
-  background: -ms-linear-gradient(270deg, #fff6fb 0%, #ffedf7 100%);
-  background: linear-gradient(180deg, #fff6fb 0%, #ffedf7 100%);
-  -webkit-box-shadow: 0 6px 16px rgba(215,123,186,0.16);
-  box-shadow: 0 6px 16px rgba(215,123,186,0.16);
+  border-radius: 8px;
+  border: 3px solid #1f1f1f;
+  background: #fffdf2;
+  -webkit-box-shadow: 5px 5px 0 rgba(31,31,31,0.18);
+  box-shadow: 5px 5px 0 rgba(31,31,31,0.18);
   -webkit-transition: -webkit-transform 0.15s ease, box-shadow 0.15s ease;
   -moz-transition: -moz-transform 0.15s ease, box-shadow 0.15s ease;
   -ms-transition: -ms-transform 0.15s ease, box-shadow 0.15s ease;
@@ -1632,43 +1659,41 @@ body {
   -moz-transform: translateY(-2px);
   -ms-transform: translateY(-2px);
   transform: translateY(-2px);
-  -webkit-box-shadow: 0 10px 20px rgba(215,123,186,0.22);
-  box-shadow: 0 10px 20px rgba(215,123,186,0.22);
+  -webkit-box-shadow: 7px 7px 0 rgba(31,31,31,0.22);
+  box-shadow: 7px 7px 0 rgba(31,31,31,0.22);
 }
 .archive-article-date {
-  color: #ad57a6;
+  color: #495b28;
 }
 #page-nav {
-  border-radius: 10px;
-  border: 1px solid rgba(235,173,216,0.85);
-  background: -webkit-linear-gradient(270deg, #fff6fb 0%, #ffeef8 100%);
-  background: -moz-linear-gradient(270deg, #fff6fb 0%, #ffeef8 100%);
-  background: -ms-linear-gradient(270deg, #fff6fb 0%, #ffeef8 100%);
-  background: linear-gradient(180deg, #fff6fb 0%, #ffeef8 100%);
-  -webkit-box-shadow: 0 8px 16px rgba(214,132,188,0.16);
-  box-shadow: 0 8px 16px rgba(214,132,188,0.16);
+  border-radius: 8px;
+  border: 3px solid #1f1f1f;
+  background: #fffdf2;
+  -webkit-box-shadow: 6px 6px 0 rgba(31,31,31,0.2);
+  box-shadow: 6px 6px 0 rgba(31,31,31,0.2);
 }
 #page-nav a:hover {
-  background: #de7fcb;
+  background: #de4730;
   color: #fff;
 }
 .article-entry code {
-  background: rgba(255,134,198,0.16);
-  color: #7d1f74;
-  border-radius: 6px;
+  background: #ffe16b;
+  color: #1f1f1f;
+  border: 1px solid #1f1f1f;
+  border-radius: 4px;
   padding: 2px 6px;
 }
 .article-entry pre {
   margin: 1.2em 0;
-  border-radius: 12px;
-  border: 1px solid #5d3b73;
-  background: #24182f;
+  border-radius: 8px;
+  border: 2px solid #1f1f1f;
+  background: #1d2730;
 }
 .article-entry .highlight {
   margin: 1.2em 0;
-  border-radius: 12px;
-  border: 1px solid #5d3b73;
-  background: #24182f;
+  border-radius: 8px;
+  border: 2px solid #1f1f1f;
+  background: #1d2730;
 }
 .article-entry .highlight pre {
   margin: 0;
@@ -1677,14 +1702,17 @@ body {
   border-radius: 0;
 }
 .article-entry .highlight .gutter pre {
-  color: #b78dc8;
+  color: #8bc36d;
 }
 .article-entry .highlight .line.marked {
-  background: rgba(255,130,199,0.2);
+  background: rgba(255,225,107,0.12);
 }
 @media screen and (max-width: 479px) {
   .article-title {
     font-size: 1.4em;
+  }
+  .widget-title {
+    font-size: 12px;
   }
   #site-stats {
     gap: 8px;
