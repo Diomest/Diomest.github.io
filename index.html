@@ -253,7 +253,7 @@
   <div class="outer">
     <div id="footer-info" class="inner">
       
-      &copy; 2026 多肉小马<br>
+      &copy; 2025 多肉小马<br>
       Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
       <div id="site-stats">
         <span id="busuanzi_container_site_pv">总访问 <span id="busuanzi_value_site_pv">0</span></span>
@@ -312,6 +312,7 @@
       </div>
     
     
+      
       <div id="bgm-widget">
         <div class="mc-jukebox-top">
           <div class="mc-disc" aria-hidden="true"></div>
@@ -332,9 +333,9 @@
         </div>
         <div class="mc-volume-row">
           <label for="bgm-volume">音量</label>
-          <input id="bgm-volume" type="range" min="0" max="100" step="1" value="35">
+          <input id="bgm-volume" type="range" min="0" max="100" step="1" value="18">
         </div>
-        <audio id="bgm-audio" src="/music/pokemon-bgm.wav" preload="auto" loop></audio>
+        <audio id="bgm-audio" data-tracks="/music/pokemon-bgm.wav" src="/music/pokemon-bgm.wav" preload="auto" loop></audio>
       </div>
     
     
@@ -441,7 +442,25 @@
     var bgmVolume = document.getElementById('bgm-volume');
     var bgmLamps = Array.prototype.slice.call(document.querySelectorAll('.mc-redstone-lamp'));
     if (bgmAudio && bgmToggle) {
-      var cfgVolume = Number('0.35');
+      var trackData = (bgmAudio.getAttribute('data-tracks') || '').split('||').filter(Boolean);
+      var chosenTrack = '';
+      if (trackData.length) {
+        chosenTrack = trackData[Math.floor(Math.random() * trackData.length)];
+        bgmAudio.src = chosenTrack;
+      }
+
+      function getTrackLabel(urlValue) {
+        if (!urlValue) return '';
+        try {
+          var fileName = decodeURIComponent(urlValue.split('/').pop() || '');
+          return fileName.replace(/\.[^/.]+$/, '');
+        } catch (_) {
+          return '';
+        }
+      }
+
+      var chosenTrackLabel = getTrackLabel(chosenTrack);
+      var cfgVolume = Number('0.18');
       if (!Number.isNaN(cfgVolume)) {
         bgmAudio.volume = Math.max(0, Math.min(1, cfgVolume));
       }
@@ -462,11 +481,11 @@
       function updateBgmUi() {
         if (bgmAudio.paused) {
           bgmToggle.textContent = '▶ 播放';
-          if (bgmStatus) bgmStatus.textContent = '宝可梦背景小调';
+          if (bgmStatus) bgmStatus.textContent = '宝可梦背景小调' + (chosenTrackLabel ? ' · ' + chosenTrackLabel : '');
           if (bgmWidget) bgmWidget.classList.remove('is-playing');
         } else {
           bgmToggle.textContent = '❚❚ 暂停';
-          if (bgmStatus) bgmStatus.textContent = '正在播放 · 宝可梦背景小调';
+          if (bgmStatus) bgmStatus.textContent = '正在播放 · ' + (chosenTrackLabel || '宝可梦背景小调');
           if (bgmWidget) bgmWidget.classList.add('is-playing');
         }
         updateRedstoneLamps();
@@ -495,7 +514,7 @@
       bgmAudio.addEventListener('pause', updateBgmUi);
       updateBgmUi();
 
-      var autoPlay = 'false' === 'true';
+      var autoPlay = 'true' === 'true';
       if (autoPlay) {
         window.addEventListener('load', function () {
           bgmAudio.play().catch(function () {});
