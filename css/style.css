@@ -1440,6 +1440,18 @@ textarea {
 #header:after {
   display: none;
 }
+#banner:after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.24;
+  background-image: -webkit-radial-gradient(circle at 12px 12px, rgba(246,95,75,0.58) 0 8px, rgba(31,31,31,0.64) 8px 9px, rgba(255,255,255,0.68) 9px 16px, transparent 16px), -webkit-radial-gradient(circle at 42px 42px, rgba(100,220,139,0.42) 0 7px, transparent 7px);
+  background-image: -moz-radial-gradient(circle at 12px 12px, rgba(246,95,75,0.58) 0 8px, rgba(31,31,31,0.64) 8px 9px, rgba(255,255,255,0.68) 9px 16px, transparent 16px), -moz-radial-gradient(circle at 42px 42px, rgba(100,220,139,0.42) 0 7px, transparent 7px);
+  background-image: -ms-radial-gradient(circle at 12px 12px, rgba(246,95,75,0.58) 0 8px, rgba(31,31,31,0.64) 8px 9px, rgba(255,255,255,0.68) 9px 16px, transparent 16px), -ms-radial-gradient(circle at 42px 42px, rgba(100,220,139,0.42) 0 7px, transparent 7px);
+  background-image: radial-gradient(circle at 12px 12px, rgba(246,95,75,0.58) 0 8px, rgba(31,31,31,0.64) 8px 9px, rgba(255,255,255,0.68) 9px 16px, transparent 16px), radial-gradient(circle at 42px 42px, rgba(100,220,139,0.42) 0 7px, transparent 7px);
+  background-size: 58px 58px;
+}
 #logo,
 #subtitle {
   text-shadow: 2px 2px 0 #1f1f1f;
@@ -1448,6 +1460,9 @@ textarea {
   color: #ffe16b;
   font-weight: 700;
   letter-spacing: 2px;
+  font-family: "Press Start 2P", "ZCOOL QingKe HuangYou", "Noto Serif SC", serif;
+  font-size: 46px;
+  line-height: 1.18;
 }
 #subtitle {
   color: #fff;
@@ -1795,6 +1810,9 @@ textarea {
   background: rgba(255,225,107,0.12);
 }
 @media screen and (max-width: 479px) {
+  #logo {
+    font-size: 32px;
+  }
   .article-title {
     font-size: 1.4em;
   }
@@ -1932,12 +1950,16 @@ textarea {
   background: #e0d7c4;
 }
 .pokemon-avatar-frame {
-  border: 4px solid #1f1f1f;
-  border-radius: 12px;
+  border: 4px solid transparent;
+  border-radius: 14px;
   padding: 4px;
-  background: #fff;
-  -webkit-box-shadow: 4px 4px 0 rgba(31,31,31,0.26);
-  box-shadow: 4px 4px 0 rgba(31,31,31,0.26);
+  background: -webkit-linear-gradient(#fff, #fff) padding-box, -webkit-linear-gradient(270deg, #f65f4b 0 46%, #1f1f1f 46% 54%, #fff 54% 100%) border-box;
+  background: -moz-linear-gradient(#fff, #fff) padding-box, -moz-linear-gradient(270deg, #f65f4b 0 46%, #1f1f1f 46% 54%, #fff 54% 100%) border-box;
+  background: -ms-linear-gradient(#fff, #fff) padding-box, -ms-linear-gradient(270deg, #f65f4b 0 46%, #1f1f1f 46% 54%, #fff 54% 100%) border-box;
+  background: linear-gradient(#fff, #fff) padding-box, linear-gradient(180deg, #f65f4b 0 46%, #1f1f1f 46% 54%, #fff 54% 100%) border-box;
+  outline: 2px solid #1f1f1f;
+  -webkit-box-shadow: 5px 5px 0 rgba(31,31,31,0.26);
+  box-shadow: 5px 5px 0 rgba(31,31,31,0.26);
   image-rendering: pixelated;
   width: 100%;
   max-width: 180px !important;
@@ -1995,7 +2017,7 @@ textarea {
   left: 18px;
   bottom: 22px;
   z-index: 998;
-  width: 190px;
+  width: 206px;
   border: 4px solid #1f1f1f;
   border-radius: 6px;
   background: -webkit-linear-gradient(270deg, #8b5a2b 0%, #6f4321 100%);
@@ -2052,7 +2074,7 @@ textarea {
   -webkit-justify-content: space-between;
   justify-content: space-between;
   gap: 8px;
-  padding: 8px;
+  padding: 8px 8px 6px;
   background: #d6b486;
 }
 #bgm-toggle {
@@ -2075,11 +2097,75 @@ textarea {
   text-overflow: ellipsis;
   max-width: 100px;
 }
+.mc-redstone-strip {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: box;
+  display: flex;
+  gap: 4px;
+  padding: 6px 8px 4px;
+  background: #d6b486;
+}
+.mc-redstone-lamp {
+  -webkit-box-flex: 1;
+  -moz-box-flex: 1;
+  box-flex: 1;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  height: 8px;
+  border: 1px solid #1f1f1f;
+  border-radius: 2px;
+  background: #6a2222;
+  -webkit-box-shadow: inset 0 1px 0 rgba(255,255,255,0.22);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.22);
+  -webkit-transition: background 0.16s ease, box-shadow 0.16s ease;
+  -moz-transition: background 0.16s ease, box-shadow 0.16s ease;
+  -ms-transition: background 0.16s ease, box-shadow 0.16s ease;
+  transition: background 0.16s ease, box-shadow 0.16s ease;
+}
+.mc-redstone-lamp.active {
+  background: #ff4545;
+  -webkit-box-shadow: 0 0 4px rgba(255,69,69,0.9), inset 0 1px 0 rgba(255,255,255,0.22);
+  box-shadow: 0 0 4px rgba(255,69,69,0.9), inset 0 1px 0 rgba(255,255,255,0.22);
+}
+.mc-volume-row {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: box;
+  display: flex;
+  -webkit-box-align: center;
+  -moz-box-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+  gap: 8px;
+  padding: 0 8px 8px;
+  background: #d6b486;
+}
+.mc-volume-row label {
+  font-size: 12px;
+  color: #1f1f1f;
+}
+.mc-volume-row input[type="range"] {
+  -webkit-box-flex: 1;
+  -moz-box-flex: 1;
+  box-flex: 1;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  accent-color: #ff4545;
+  cursor: pointer;
+}
 @media screen and (max-width: 479px) {
   #bgm-widget {
     left: 10px;
     bottom: 12px;
-    width: 158px;
+    width: 170px;
   }
   .mc-jukebox-top {
     height: 54px;
@@ -2089,6 +2175,9 @@ textarea {
     height: 32px;
   }
   #bgm-status {
+    display: none;
+  }
+  .mc-volume-row label {
     display: none;
   }
 }

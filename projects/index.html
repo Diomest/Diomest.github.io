@@ -26,7 +26,7 @@
   
   
   
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&display=swap.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Press+Start+2P&family=ZCOOL+QingKe+HuangYou&display=swap.css">
 
   
 <link rel="stylesheet" href="/css/style.css">
@@ -298,6 +298,20 @@
           <button id="bgm-toggle" type="button">▶ 播放</button>
           <span id="bgm-status">宝可梦背景小调</span>
         </div>
+        <div class="mc-redstone-strip" id="bgm-strip" aria-hidden="true">
+          <span class="mc-redstone-lamp"></span>
+          <span class="mc-redstone-lamp"></span>
+          <span class="mc-redstone-lamp"></span>
+          <span class="mc-redstone-lamp"></span>
+          <span class="mc-redstone-lamp"></span>
+          <span class="mc-redstone-lamp"></span>
+          <span class="mc-redstone-lamp"></span>
+          <span class="mc-redstone-lamp"></span>
+        </div>
+        <div class="mc-volume-row">
+          <label for="bgm-volume">音量</label>
+          <input id="bgm-volume" type="range" min="0" max="100" step="1" value="35">
+        </div>
         <audio id="bgm-audio" src="/music/pokemon-bgm.wav" preload="auto" loop></audio>
       </div>
     
@@ -402,10 +416,25 @@
     var bgmToggle = document.getElementById('bgm-toggle');
     var bgmStatus = document.getElementById('bgm-status');
     var bgmWidget = document.getElementById('bgm-widget');
+    var bgmVolume = document.getElementById('bgm-volume');
+    var bgmLamps = Array.prototype.slice.call(document.querySelectorAll('.mc-redstone-lamp'));
     if (bgmAudio && bgmToggle) {
       var cfgVolume = Number('0.35');
       if (!Number.isNaN(cfgVolume)) {
         bgmAudio.volume = Math.max(0, Math.min(1, cfgVolume));
+      }
+      if (bgmVolume) {
+        bgmVolume.value = String(Math.round(bgmAudio.volume * 100));
+      }
+
+      function updateRedstoneLamps() {
+        if (!bgmLamps.length) return;
+        var level = bgmAudio.volume;
+        var activeCount = Math.max(0, Math.round(level * bgmLamps.length));
+        if (bgmAudio.paused) activeCount = 0;
+        bgmLamps.forEach(function (lampNode, lampIndex) {
+          lampNode.classList.toggle('active', lampIndex < activeCount);
+        });
       }
 
       function updateBgmUi() {
@@ -418,6 +447,7 @@
           if (bgmStatus) bgmStatus.textContent = '正在播放 · 宝可梦背景小调';
           if (bgmWidget) bgmWidget.classList.add('is-playing');
         }
+        updateRedstoneLamps();
       }
 
       bgmToggle.addEventListener('click', function () {
@@ -430,6 +460,14 @@
         }
         updateBgmUi();
       });
+
+      if (bgmVolume) {
+        bgmVolume.addEventListener('input', function () {
+          var sliderValue = Number(bgmVolume.value || '0') / 100;
+          bgmAudio.volume = Math.max(0, Math.min(1, sliderValue));
+          updateRedstoneLamps();
+        });
+      }
 
       bgmAudio.addEventListener('play', updateBgmUi);
       bgmAudio.addEventListener('pause', updateBgmUi);
