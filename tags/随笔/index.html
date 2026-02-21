@@ -406,6 +406,76 @@
       if (!text) return;
       var pType = resolveType(text);
       node.classList.add('poke-type-badge', 'poke-type-' + pType);
+      node.setAttribute('data-poke-label', text);
+    });
+
+    var articleNodes = Array.prototype.slice.call(document.querySelectorAll('article.article'));
+
+    function normalizeLabel(value) {
+      return (value || '').trim().toLowerCase();
+    }
+
+    function getArticleLabels(articleNode) {
+      var labels = [];
+      articleNode.querySelectorAll('.article-tag-list-link, .article-category-link').forEach(function (linkNode) {
+        labels.push(normalizeLabel(linkNode.textContent));
+      });
+      return labels;
+    }
+
+    var filterBarNode = null;
+    var filterTextNode = null;
+
+    function ensureFilterBar() {
+      if (filterBarNode) return;
+      var mainNode = document.getElementById('main');
+      if (!mainNode) return;
+
+      filterBarNode = document.createElement('div');
+      filterBarNode.id = 'poke-filter-bar';
+      filterBarNode.innerHTML = '<span id="poke-filter-text"></span><button id="poke-filter-clear" type="button">清除筛选</button>';
+      mainNode.insertBefore(filterBarNode, mainNode.firstChild);
+      filterTextNode = document.getElementById('poke-filter-text');
+
+      var clearButton = document.getElementById('poke-filter-clear');
+      if (clearButton) {
+        clearButton.addEventListener('click', function () {
+          articleNodes.forEach(function (articleNode) {
+            articleNode.classList.remove('is-hidden-by-filter');
+          });
+          filterBarNode.classList.remove('active');
+        });
+      }
+    }
+
+    function applyBadgeFilter(labelText) {
+      if (articleNodes.length < 2) return;
+      ensureFilterBar();
+      var target = normalizeLabel(labelText);
+      if (!target) return;
+
+      var visibleCount = 0;
+      articleNodes.forEach(function (articleNode) {
+        var labels = getArticleLabels(articleNode);
+        var match = labels.indexOf(target) !== -1;
+        articleNode.classList.toggle('is-hidden-by-filter', !match);
+        if (match) visibleCount += 1;
+      });
+
+      if (filterBarNode && filterTextNode) {
+        filterTextNode.textContent = '当前筛选：' + labelText + '（' + visibleCount + ' 篇）';
+        filterBarNode.classList.add('active');
+      }
+    }
+
+    document.querySelectorAll('.article .poke-type-badge').forEach(function (badgeNode) {
+      badgeNode.addEventListener('click', function (event) {
+        if (articleNodes.length < 2) return;
+        var labelText = badgeNode.getAttribute('data-poke-label') || badgeNode.textContent;
+        if (!labelText) return;
+        event.preventDefault();
+        applyBadgeFilter(labelText.trim());
+      });
     });
 
     document.querySelectorAll('.article-entry img, #header img, .widget img').forEach(function (imgNode) {
