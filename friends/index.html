@@ -618,8 +618,39 @@
 
       var autoPlay = 'true' === 'true';
       if (autoPlay) {
+        var armAutoPlayByGesture = function () {
+          var onceEvents = ['pointerdown', 'touchstart', 'keydown'];
+          var started = false;
+
+          function cleanup() {
+            onceEvents.forEach(function (eventName) {
+              document.removeEventListener(eventName, onFirstGesture, true);
+            });
+          }
+
+          function onFirstGesture() {
+            if (started) return;
+            started = true;
+            bgmAudio.play().then(function () {
+              updateBgmUi();
+              cleanup();
+            }).catch(function () {
+              started = false;
+            });
+          }
+
+          onceEvents.forEach(function (eventName) {
+            document.addEventListener(eventName, onFirstGesture, true);
+          });
+        };
+
         window.addEventListener('load', function () {
-          bgmAudio.play().catch(function () {});
+          bgmAudio.play().then(function () {
+            updateBgmUi();
+          }).catch(function () {
+            showBgmNotice('轻触页面任意位置，将自动播放');
+            armAutoPlayByGesture();
+          });
         });
       }
     }
