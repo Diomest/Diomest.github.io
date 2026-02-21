@@ -310,6 +310,13 @@
       </div>
     
     
+      <div id="bgm-widget">
+        <button id="bgm-toggle" type="button">♫ 播放音乐</button>
+        <span id="bgm-status">宝可梦背景小调</span>
+        <audio id="bgm-audio" src="/music/pokemon-bgm.wav" preload="auto" loop></audio>
+      </div>
+    
+    
 
 
 <script src="/js/jquery-3.6.4.min.js"></script>
@@ -405,6 +412,48 @@
         copyText('cd /Users/mac/Desktop/test/website_hexo && open "source/' + postSource + '"');
       });
     });
+
+    var bgmAudio = document.getElementById('bgm-audio');
+    var bgmToggle = document.getElementById('bgm-toggle');
+    var bgmStatus = document.getElementById('bgm-status');
+    if (bgmAudio && bgmToggle) {
+      var cfgVolume = Number('0.35');
+      if (!Number.isNaN(cfgVolume)) {
+        bgmAudio.volume = Math.max(0, Math.min(1, cfgVolume));
+      }
+
+      function updateBgmUi() {
+        if (bgmAudio.paused) {
+          bgmToggle.textContent = '♫ 播放音乐';
+          if (bgmStatus) bgmStatus.textContent = '宝可梦背景小调';
+        } else {
+          bgmToggle.textContent = '❚❚ 暂停音乐';
+          if (bgmStatus) bgmStatus.textContent = '正在播放 · 宝可梦背景小调';
+        }
+      }
+
+      bgmToggle.addEventListener('click', function () {
+        if (bgmAudio.paused) {
+          bgmAudio.play().catch(function () {
+            alert('浏览器阻止了自动播放，请再点一次“播放音乐”。');
+          });
+        } else {
+          bgmAudio.pause();
+        }
+        updateBgmUi();
+      });
+
+      bgmAudio.addEventListener('play', updateBgmUi);
+      bgmAudio.addEventListener('pause', updateBgmUi);
+      updateBgmUi();
+
+      var autoPlay = 'false' === 'true';
+      if (autoPlay) {
+        window.addEventListener('load', function () {
+          bgmAudio.play().catch(function () {});
+        });
+      }
+    }
   })();
 </script>
 <script>
