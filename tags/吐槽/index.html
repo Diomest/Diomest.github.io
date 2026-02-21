@@ -273,8 +273,13 @@
     
     
       <div id="bgm-widget">
-        <button id="bgm-toggle" type="button">♫ 播放音乐</button>
-        <span id="bgm-status">宝可梦背景小调</span>
+        <div class="mc-jukebox-top">
+          <div class="mc-disc" aria-hidden="true"></div>
+        </div>
+        <div class="mc-jukebox-controls">
+          <button id="bgm-toggle" type="button">▶ 播放</button>
+          <span id="bgm-status">宝可梦背景小调</span>
+        </div>
         <audio id="bgm-audio" src="/music/pokemon-bgm.wav" preload="auto" loop></audio>
       </div>
     
@@ -378,6 +383,7 @@
     var bgmAudio = document.getElementById('bgm-audio');
     var bgmToggle = document.getElementById('bgm-toggle');
     var bgmStatus = document.getElementById('bgm-status');
+    var bgmWidget = document.getElementById('bgm-widget');
     if (bgmAudio && bgmToggle) {
       var cfgVolume = Number('0.35');
       if (!Number.isNaN(cfgVolume)) {
@@ -386,11 +392,13 @@
 
       function updateBgmUi() {
         if (bgmAudio.paused) {
-          bgmToggle.textContent = '♫ 播放音乐';
+          bgmToggle.textContent = '▶ 播放';
           if (bgmStatus) bgmStatus.textContent = '宝可梦背景小调';
+          if (bgmWidget) bgmWidget.classList.remove('is-playing');
         } else {
-          bgmToggle.textContent = '❚❚ 暂停音乐';
+          bgmToggle.textContent = '❚❚ 暂停';
           if (bgmStatus) bgmStatus.textContent = '正在播放 · 宝可梦背景小调';
+          if (bgmWidget) bgmWidget.classList.add('is-playing');
         }
       }
 
