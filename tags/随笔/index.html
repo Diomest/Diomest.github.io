@@ -271,7 +271,7 @@
         </div>
         <div class="mc-jukebox-controls">
           <button id="bgm-toggle" type="button">▶ 播放</button>
-          <span id="bgm-status">宝可梦背景小调</span>
+          <span id="bgm-status">Vaundy - 舞女</span>
         </div>
         <div class="mc-redstone-strip" id="bgm-strip" aria-hidden="true">
           <span class="mc-redstone-lamp"></span>
@@ -287,7 +287,7 @@
           <label for="bgm-volume">音量</label>
           <input id="bgm-volume" type="range" min="0" max="100" step="1" value="18">
         </div>
-        <audio id="bgm-audio" data-tracks="/music/pokemon-bgm.wav" src="/music/pokemon-bgm.wav" preload="auto" loop></audio>
+        <audio id="bgm-audio" data-tracks="/music/playlist/Vaundy-%E8%88%9E%E5%A5%B3.mp3" src="/music/playlist/Vaundy-%E8%88%9E%E5%A5%B3.mp3" preload="auto" loop></audio>
       </div>
     
     
@@ -433,11 +433,11 @@
       function updateBgmUi() {
         if (bgmAudio.paused) {
           bgmToggle.textContent = '▶ 播放';
-          if (bgmStatus) bgmStatus.textContent = '宝可梦背景小调' + (chosenTrackLabel ? ' · ' + chosenTrackLabel : '');
+          if (bgmStatus) bgmStatus.textContent = 'Vaundy - 舞女' + (chosenTrackLabel ? ' · ' + chosenTrackLabel : '');
           if (bgmWidget) bgmWidget.classList.remove('is-playing');
         } else {
           bgmToggle.textContent = '❚❚ 暂停';
-          if (bgmStatus) bgmStatus.textContent = '正在播放 · ' + (chosenTrackLabel || '宝可梦背景小调');
+          if (bgmStatus) bgmStatus.textContent = '正在播放 · ' + (chosenTrackLabel || 'Vaundy - 舞女');
           if (bgmWidget) bgmWidget.classList.add('is-playing');
         }
         updateRedstoneLamps();
@@ -460,6 +460,121 @@
           bgmAudio.volume = Math.max(0, Math.min(1, sliderValue));
           updateRedstoneLamps();
         });
+      }
+
+      if (bgmWidget) {
+        var bgmDragHandle = bgmWidget.querySelector('.mc-jukebox-top');
+        var bgmDragKey = 'my-landscape-bgm-position';
+        var isDraggingBgm = false;
+        var hasDraggedBgm = false;
+        var dragStartX = 0;
+        var dragStartY = 0;
+        var widgetStartLeft = 0;
+        var widgetStartTop = 0;
+
+        function getPointer(event) {
+          if (event.touches && event.touches.length) return event.touches[0];
+          if (event.changedTouches && event.changedTouches.length) return event.changedTouches[0];
+          return event;
+        }
+
+        function clampWidgetPosition(leftValue, topValue) {
+          var maxLeft = Math.max(0, window.innerWidth - bgmWidget.offsetWidth);
+          var maxTop = Math.max(0, window.innerHeight - bgmWidget.offsetHeight);
+          return {
+            left: Math.min(Math.max(0, leftValue), maxLeft),
+            top: Math.min(Math.max(0, topValue), maxTop)
+          };
+        }
+
+        function applyWidgetPosition(leftValue, topValue) {
+          var position = clampWidgetPosition(leftValue, topValue);
+          bgmWidget.style.left = position.left + 'px';
+          bgmWidget.style.top = position.top + 'px';
+          bgmWidget.style.right = 'auto';
+          bgmWidget.style.bottom = 'auto';
+        }
+
+        function saveWidgetPosition() {
+          try {
+            var rect = bgmWidget.getBoundingClientRect();
+            window.localStorage.setItem(bgmDragKey, JSON.stringify({
+              left: Math.round(rect.left),
+              top: Math.round(rect.top)
+            }));
+          } catch (_) {}
+        }
+
+        function restoreWidgetPosition() {
+          try {
+            var raw = window.localStorage.getItem(bgmDragKey);
+            if (!raw) return;
+            var parsed = JSON.parse(raw);
+            if (!parsed || typeof parsed.left !== 'number' || typeof parsed.top !== 'number') return;
+            applyWidgetPosition(parsed.left, parsed.top);
+          } catch (_) {}
+        }
+
+        function endBgmDrag() {
+          if (!isDraggingBgm) return;
+          isDraggingBgm = false;
+          bgmWidget.classList.remove('is-dragging');
+          document.removeEventListener('mousemove', onBgmDragMove);
+          document.removeEventListener('mouseup', endBgmDrag);
+          document.removeEventListener('touchmove', onBgmDragMove);
+          document.removeEventListener('touchend', endBgmDrag);
+          document.removeEventListener('touchcancel', endBgmDrag);
+          if (hasDraggedBgm) {
+            saveWidgetPosition();
+          }
+        }
+
+        function onBgmDragMove(event) {
+          if (!isDraggingBgm) return;
+          var point = getPointer(event);
+          if (!point) return;
+          var offsetX = point.clientX - dragStartX;
+          var offsetY = point.clientY - dragStartY;
+          if (!hasDraggedBgm && (Math.abs(offsetX) > 2 || Math.abs(offsetY) > 2)) {
+            hasDraggedBgm = true;
+          }
+          applyWidgetPosition(widgetStartLeft + offsetX, widgetStartTop + offsetY);
+          if (event.cancelable) event.preventDefault();
+        }
+
+        function startBgmDrag(event) {
+          if (!bgmDragHandle) return;
+          var point = getPointer(event);
+          if (!point) return;
+          var rect = bgmWidget.getBoundingClientRect();
+          isDraggingBgm = true;
+          hasDraggedBgm = false;
+          dragStartX = point.clientX;
+          dragStartY = point.clientY;
+          widgetStartLeft = rect.left;
+          widgetStartTop = rect.top;
+          bgmWidget.classList.add('is-dragging');
+          document.addEventListener('mousemove', onBgmDragMove);
+          document.addEventListener('mouseup', endBgmDrag);
+          document.addEventListener('touchmove', onBgmDragMove, { passive: false });
+          document.addEventListener('touchend', endBgmDrag);
+          document.addEventListener('touchcancel', endBgmDrag);
+          if (event.cancelable) event.preventDefault();
+        }
+
+        if (bgmDragHandle) {
+          bgmDragHandle.addEventListener('mousedown', startBgmDrag);
+          bgmDragHandle.addEventListener('touchstart', startBgmDrag, { passive: false });
+        }
+
+        window.addEventListener('resize', function () {
+          var rect = bgmWidget.getBoundingClientRect();
+          if (bgmWidget.style.top || bgmWidget.style.left) {
+            applyWidgetPosition(rect.left, rect.top);
+          }
+        });
+
+        restoreWidgetPosition();
       }
 
       bgmAudio.addEventListener('play', updateBgmUi);
